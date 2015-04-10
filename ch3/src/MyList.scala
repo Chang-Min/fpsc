@@ -53,9 +53,7 @@ object List {
                 else f(x, foldRightP(xs, z)(f))
             }
         }
-
     def product3(ns: List[Double]) = foldRightP(ns, 1.0)(_ * _)
-
     def length[A](l: List[A]): Int = {
         def count(e: A, n: Int): Int = e match {
             case Nil => n
@@ -63,7 +61,7 @@ object List {
         }
         foldRight(l, 0)(count)
     }
-
+    ////////////////////////////// foldLeft ///////////////////////////
     def foldLeft[A,B](as: List[A], z:B)(f: (B,A) => B): B = {
         @annotation.tailrec
         def go(l: List[A], r:B): B = l match {
@@ -81,4 +79,12 @@ object List {
         }
         foldLeft(l, 0)(count)
     }
+    def reverse[A](l:List[A]): List[A] = {
+        def build(l:List[A], r:List[A]): List[A] = l match {
+            case Nil => r
+            case Cons(x,xs) => build(xs, Cons(x, r))
+        }
+        build(l, Nil:List[A])
+    }
+    def rev2[A](l:List[A]): List[A] = foldLeft(l, Nil:List[A])((a,b) => Cons(b,a))
 }
