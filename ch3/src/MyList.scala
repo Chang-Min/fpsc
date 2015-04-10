@@ -87,4 +87,5 @@ object List {
         build(l, Nil:List[A])
     }
     def rev2[A](l:List[A]): List[A] = foldLeft(l, Nil:List[A])((a,b) => Cons(b,a))
+    def adder1(l:List[Int]): List[Int] =
 }
