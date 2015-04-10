@@ -63,4 +63,22 @@ object List {
         }
         foldRight(l, 0)(count)
     }
+
+    def foldLeft[A,B](as: List[A], z:B)(f: (B,A) => B): B = {
+        @annotation.tailrec
+        def go(l: List[A], r:B): B = l match {
+            case Nil => r
+            case Cons(x, xs) => go(xs, f(r, x))
+        }
+        go(as, z)
+    }
+    def sum4[A](ns: List[A], z: A)(f: (A,A)=>A) = foldLeft(ns, z)(f)
+    def prd4[A](ns: List[A], z: A)(f: (A,A)=>A) = foldLeft(ns, z)(f)
+    def len4[A](l: List[A]): Int = {
+        def count(n:Int, e:A): Int = e match {
+            case Nil => n
+            case _ => n+1
+        }
+        foldLeft(l, 0)(count)
+    }
 }
