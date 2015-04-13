@@ -87,5 +87,20 @@ object List {
         build(l, Nil:List[A])
     }
     def rev2[A](l:List[A]): List[A] = foldLeft(l, Nil:List[A])((a,b) => Cons(b,a))
-    def adder1(l:List[Int]): List[Int] =
+    def adder1(l:List[Int]): List[Int] = l match {
+        case Nil => l
+        case Cons(x,xs) => Cons(x+1, adder1(xs))
+    }
+    def adder(l:List[Int]): List[Int] = {
+        @annotation.tailrec
+        def build(l:List[Int], r:List[Int]): List[Int] = l match {
+            case Nil => r
+            case Cons(x,xs) => build(xs, Cons(x, r))
+        }
+        reverse(build(l, Nil))
+    }
+    def double2str(l:List[Double]): List[String] = foldRight(l, Nil:List[String])((d,res) => Cons(d.toString, res))
+    def mymap[A,B](as:List[A])(f:A => B): List[B] = {
+        foldRight(as, Nil:List[B])((a,b) => Cons(f(a), b))
+    }
 }
