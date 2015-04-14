@@ -23,3 +23,5 @@ val A = List(List(1,2,3), List(4,5,6), List(7,8,9))
 List.concat(A)
 List.concat2(A)
 List.flatMap(x)(a => List(a,a))
+List.filterViaFlatMap[Int](a)(x => x>2)
+
