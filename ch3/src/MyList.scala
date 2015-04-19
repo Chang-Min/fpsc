@@ -124,4 +124,17 @@ object List {
     def filterViaFlatMap[A](as: List[A])(f:A=>Boolean): List[A] = {
         flatMap(as)(a => if (f(a)) Cons(a,Nil) else Nil)
     }
+    def addPairwise(l:List[Int], r:List[Int]): List[Int] = l match {
+        case Nil => r
+        case Cons(x,xs) => r match {
+            case Nil => Cons(x, addPairwise(xs, Nil))
+            case Cons(y, ys) => Cons(x+y, addPairwise(xs, ys))
+        }
+    }
+
+    def zipWith[A](l:List[A], r:List[A])(f:(A,A)=>A): List[A] = (l,r) match {
+        case (_, Nil) => Nil
+        case (Nil, _) => Nil
+        case (Cons(h1,t1), Cons(h2,t2)) => Cons(f(h1,h2), zipWith(t1,t2)(f))
+    }
 }

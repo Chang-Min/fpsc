@@ -24,4 +24,5 @@ List.concat(A)
 List.concat2(A)
 List.flatMap(x)(a => List(a,a))
 List.filterViaFlatMap[Int](a)(x => x>2)
-
+List.addPairwise(a,b)
+List.zipWith(a,b)((x,y) => y/x)
